@@ -1,0 +1,78 @@
+/* Comment-module header */
+.categorize-header {
+  color: white;
+  background-color: #795548;
+  padding: 10;
+}
+
+/* Message if there isn't any comments */
+.no-comments-msg {
+  text-align: center;
+  margin-top: 5;
+}
+
+/* Comment-area */
+.comment {
+  margin-top: 15;
+  margin-bottom: 15;
+  padding-left: 5;
+  padding-right: 15;
+}
+
+/* User-image in comments */
+.user-img {
+  stretch: aspectFill;
+  border-radius: 100;
+  margin-top: 3;
+}
+
+/* Comment's usename and text */
+.comment-content {
+  margin-left: 5;
+  margin-right: 5;
+  padding: 10;
+  background-color: #eeeeee;
+  border-radius: 5;
+}
+/* User of the comment */
+.comment-username {
+  margin-bottom: 3;
+  font-weight: bold;
+  font-size: 16;
+}
+/* Likes and date of comment */
+.comment-lower-area {
+  margin-left: 10;
+  margin-top: 5;
+}
+
+
+/* Make comment section */
+.comment-section {
+  padding: 3;
+}
+.profile-picture {
+  height: 43;
+  width: 43;
+  stretch: aspectFill;
+  border-radius: 100;
+}
+.text-input {
+  border-color: #858484;
+  border-width: 1;
+  border-radius: 15;
+  margin-left: 5;
+}
+TextField {
+  placeholder-color: #686767;
+}
+.post-button {
+  font-size: 30;
+  color: #794c3c;
+  border-radius: 40;
+  border-color: transparent;
+}
+.activity-indicator {
+  height: 62;
+  width: 62;
+}

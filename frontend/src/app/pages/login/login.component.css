@@ -1,0 +1,50 @@
+.test {
+  background-image: url('~/assets/images/sketchs/login-picture.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.container {
+  margin: 10;
+  vertical-align: middle;
+}
+
+.login-form {
+  padding: 15;
+  background-color: #fff;
+  border-radius: 5;
+}
+
+TextField {
+  font-weight: bold;
+  margin-bottom: 5;
+}
+
+.register-text {
+  color: #5656b3;
+  text-decoration: underline;
+}
+
+.social-container {
+  background-color: #fff;
+  margin-top: 10;
+  padding: 15;
+  border-radius: 5;
+}
+
+.social-container Label {
+  margin-bottom: 10;
+  text-align: center;
+}
+
+.fb {
+  background-color: #3b5998;
+  text-transform: none;
+  color: white;
+}
+.google {
+  background-color: #db4437;
+  text-transform: none;
+  color: white;
+}

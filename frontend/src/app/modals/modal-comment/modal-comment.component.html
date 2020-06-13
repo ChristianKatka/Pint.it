@@ -1,0 +1,66 @@
+<StackLayout #modal>
+	<GridLayout rows='* auto'>
+		<StackLayout row='0'>
+			<!-- CATEGORING COMMENTS -->
+			<StackLayout class='categorize-header'>
+				<GridLayout columns='* *' rows='auto'>
+					<Label (tap)='closeModal()' col='0'>
+						<FormattedString>
+							<Span text='&#xf053;' class='fas'></Span>
+							<Span text=' Palaa takaisin'></Span>
+						</FormattedString>
+					</Label>
+					<Label horizontalAlignment='right' col='1' (tap)='changeCategory()'>
+						<FormattedString>
+							<Span text='&#xf0dd; ' class='fas'></Span>
+							<Span [text]='order'></Span>
+						</FormattedString>
+					</Label>
+				</GridLayout>
+			</StackLayout>
+			<!-- NO COMMENTS -->
+			<StackLayout *ngIf='comments && comments.length < 1' class='no-comments-msg'>
+				<Label text='Ei kommentteja - ole ensimmäinen!'></Label>
+			</StackLayout>
+
+			<!-- ALL COMMENTS -->
+			<RadListView [items]='comments' pullToRefresh='true' (pullToRefreshInitiated)='getComments(0, true, $event)'
+				loadOnDemandMode='Auto' (loadMoreDataRequested)='getComments(comments.length, false, false, $event)'>
+				<ng-template let-item='item'>
+					<StackLayout>
+						<GridLayout columns='35 auto *' rows='35 * auto' class='comment'>
+							<Image class='user-img' row='0' col='0' (tap)='showUserProfile(item.username)'
+								src='{{ item.img ? url + item.img : url + "default-picture" }}.png'>
+							</Image>
+							<GridLayout row='0' col='1' rows='* *' rowspan='2' colspan='3' class='comment-content'>
+								<Label row='0' [text]='item.username' class='comment-username'
+									(tap)='closeModal(item.username)'></Label>
+								<Label row='1' colspan='3' [text]='item.text' textWrap='true'></Label>
+							</GridLayout>
+							<Label #thumb [color]='item.liked ? "#b67f64" : "#595959"' row='2' col='1'
+								text='&#xf164; {{ item.likes ? item.likes : 0 }}' class='fas comment-lower-area'
+								(tap)='toggleLike(item.id, item.username, thumb)'></Label>
+							<Label row='2' col='2' text='&#xf017; {{ item.date }}'
+								class='far comment-lower-area'></Label>
+						</GridLayout>
+					</StackLayout>
+				</ng-template>
+			</RadListView>
+		</StackLayout>
+
+		<!-- NEW COMMENT -->
+		<StackLayout row='1' class='comment-section'>
+			<GridLayout columns='auto * 60'>
+				<Image class='profile-picture' col='0'
+					src='{{ profilePic ? url + profilePic : url + "default-picture" }}.png'></Image>
+				<TextField #comment col='1' class='text-input' hint='Kommentoi' [(ngModel)]='newComment.text' maxLength='500'>
+				</TextField>
+				<Button *ngIf='!isBusy' col='2' (tap)='createComment(comment)' class='fas post-button' text='&#xf0a9;'
+					isEnabled='{{ newComment.text && newComment.text.length > 0 ? true : false  }}'></Button>
+				<ActivityIndicator *ngIf='isBusy' [busy]='isBusy' col='2' class='activity-indicator'>
+				</ActivityIndicator>
+			</GridLayout>
+		</StackLayout>
+
+	</GridLayout>
+</StackLayout>

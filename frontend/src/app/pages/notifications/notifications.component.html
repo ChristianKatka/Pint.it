@@ -1,0 +1,36 @@
+<ActionBar>
+  <Label text='Ilmoitukset' class='h2' color='white' textAlignment='center'></Label>
+</ActionBar>
+
+<StackLayout>
+  <ActivityIndicator *ngIf='isBusy' [busy]='isBusy' class='activity-indicator' width='100' height='100' color='#795548'>
+  </ActivityIndicator>
+</StackLayout>
+
+<StackLayout *ngIf='noNotifications' class='p-10'>
+  <Label text='Sinulla ei ole yhtäkään ilmoitusta' textAlignment='center'></Label>
+</StackLayout>
+
+<RadListView [items]="notifications" pullToRefresh='true' (itemTap)='previewNotification($event.index)' 
+  (pullToRefreshInitiated)='getNotifications($event)'>
+  <StackLayout>
+    <StackLayout class='container' *ngFor='let n of notifications'>
+      <GridLayout margin='5 10 5 0' columns='55, auto, auto' rows='30, -10, auto'>
+        <Image row='0' col='0' src='{{ n.sender.img ? url + n.sender.img : url + "default-picture" }}.png'
+          [nsRouterLink]="['/profile/', n.peer_user]"></Image>
+        <Label row='0' col='1' fontWeight='bold'>
+          <FormattedString>
+            <Span class='user-name'
+              text='{{ n.peer_user.length > 17 ? (n.peer_user | slice:0:17) : (n.peer_user) }}'
+              textWrap='true' [nsRouterLink]="['/profile/', n.peer_user]"></Span>
+            <Span *ngIf='n.peer_user.length > 17' text='..'></Span>
+          </FormattedString>
+        </Label>
+        <Label row='0' col='2' class='typeofNotification' [text]='n.typeString' colSpan='2'></Label>
+        <Label row='2' col='1' class='minutefont' [text]='n.date' textSize='20'></Label>
+      </GridLayout>
+      <StackLayout class='horizontalLine hr-light'></StackLayout>
+    </StackLayout>
+    <Label text='Ei muuta näytettävää' class='noMore' textAlignment='center'></Label>
+  </StackLayout>
+</RadListView>

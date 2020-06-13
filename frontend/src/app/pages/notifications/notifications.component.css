@@ -1,0 +1,62 @@
+Image {
+  width: 32;
+  height: 32;
+  border-radius: 100;
+  stretch: aspectFill;
+}
+
+.horizontalLine {
+  width: 400;
+}
+
+.noMore {
+  margin-top: 10;
+  animation-name: opacity;
+  animation-duration: 0.5;
+}
+
+.minutefont {
+  font-size: 11;
+  margin-left: 6;
+  margin-top: 10;
+}
+
+.user-name {
+  font-size: 17;
+  color: rgb(32, 32, 32);
+}
+
+.typeofNotification {
+  font-size: 14;
+  padding-top: 2;
+  margin-left: 6;
+  text-align: center;
+}
+
+/* Animations */
+.container {
+  animation-name: example;
+  animation-duration: 0.3;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+@keyframes example {
+  from {
+    transform: translate(-80, 0);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+.animate {
+  animation-name: opacity;
+  animation-duration: 0.5;
+}
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

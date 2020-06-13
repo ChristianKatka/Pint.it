@@ -1,0 +1,38 @@
+<StackLayout>
+
+	<!-- HEADER -->
+	<StackLayout class='header'>
+		<Label (tap)='closeModal()'>
+			<FormattedString>
+				<Span text='&#xf053;' class='fas'></Span>
+				<Span text=' Palaa takaisin'></Span>
+			</FormattedString>
+		</Label>
+	</StackLayout>
+
+	<!-- SEARCH-AREA -->
+	<GridLayout rows='auto *'>
+
+		<!-- SEARCH-BAR -->
+		<StackLayout row='0'>
+			<SearchBar #searchbar hint='Etsi käyttäjiä' (textChange)='searchUsers(searchbar.text)'></SearchBar>
+		</StackLayout>
+
+		<!-- USERS FOUND -->
+		<StackLayout row='1'>
+			<Label *ngIf='(users$ | async)?.length < 1 && searchbar.text' text='Käyttäjiä ei löytynyt' class='p-10'></Label>
+			<StackLayout>
+				<ListView [items]='users$ | async' height='700'>
+					<ng-template let-item='item'>
+						<GridLayout columns='50 auto' class='p-10' (tap)='goToProfile(item.username)'>
+							<Image col='0' src='{{ item.img ? url + item.img : url + "default-picture" }}.png'></Image>
+							<Label col='1' [text]='item.username' class='m-t-10 m-l-10'></Label>
+						</GridLayout>
+					</ng-template>
+				</ListView>
+			</StackLayout>
+		</StackLayout>
+
+	</GridLayout>
+
+</StackLayout>

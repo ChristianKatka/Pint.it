@@ -1,0 +1,9 @@
+<ActionBar>
+  <Label text='Asetukset' class='h2' color='white'></Label>
+</ActionBar>
+
+<ListView [items]='item' (itemTap)='showModal($event.index)' class='list-group'>
+  <ng-template let-item='item'>
+    <Label [text]='item.name' class='list-group-item'></Label>
+  </ng-template>
+</ListView>

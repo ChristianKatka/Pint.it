@@ -1,0 +1,16 @@
+<StackLayout>
+
+  <!-- Upper filter-area -->
+  <StackLayout #FilterArea orientation='horizontal' class='filters'>
+    <Label #labelFollowed text='Seuratut' (tap)='toggleLabel("Seuratut")'></Label>
+    <Label #labelAll text='Kaikki'(tap)='toggleLabel("Kaikki")'></Label>
+  </StackLayout>
+
+  <StackLayout class='hr-light'></StackLayout>
+ 
+  <!-- Lower filter-area -->
+  <StackLayout class='orders' *ngFor='let order of orders'>
+    <Label [text]='order' (tap)='chooseOption(order)'></Label>
+  </StackLayout>
+
+</StackLayout>

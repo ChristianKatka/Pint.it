@@ -1,0 +1,12 @@
+.header {
+  background-color: #795548;
+  padding: 10;
+  color: white;
+}
+
+Image {
+  height: 40;
+  width: 40;
+  stretch: aspectFill;
+  border-radius: 100;
+}

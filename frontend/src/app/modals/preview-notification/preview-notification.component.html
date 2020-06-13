@@ -1,0 +1,73 @@
+<GridLayout rows='* auto'>
+	<ScrollView row='0'>
+
+		<StackLayout>
+			<StackLayout *ngIf='post'>
+				<GridLayout columns='auto auto *' rows='* * * auto auto'>
+
+					<!-- POST PICTURE -->
+					<Image row='0' *ngIf='post.img' colspan='3' src='{{ url + post.img }}.png' class='m-b-10'></Image>
+
+					<!-- BEER NAME, TYPE & GRADE -->
+					<GridLayout row='1' rows='auto auto auto' columns='100 auto' class='beer-info'>
+						<Label *ngIf='post.drink_name' row='0' col='0' colspan='2' [text]='post.drink_name'
+							class='beer-name'></Label>
+						<Label *ngIf='post.drink_type' row='1' col='0' colspan='2' text='Tyyppi:' fontWeight='bold'></Label>
+						<Label *ngIf='post.drink_type' row='1' col='2' [text]='post.drink_type'></Label>
+						<Label *ngIf='post.rating > 0' row='2' col='0' colspan='2' text='Arvosana:' fontWeight='bold'></Label>
+						<Label *ngIf='post.rating > 0' row='2' col='2' [text]='post.stars' class='fas'></Label>
+					</GridLayout>
+
+					<!-- DESCRIPTION -->
+					<StackLayout row='2' col='0' colspan='3' (tap)='toggleDesc(shortDesc, longDesc)' class='desc-area'>
+						<Label #shortDesc textWrap='true'>
+							<FormattedString>
+								<Span text='{{ post.text.length > 150 ? (post.text | slice:0:150) : (post.text) }}'></Span>
+								<Span *ngIf='post.text.length > 150' text='.. Näytä lisää' class='expand-desc'></Span>
+							</FormattedString>
+						</Label>
+						<Label #longDesc textWrap='true' visibility='collapse'>
+							<FormattedString>
+								<Span text='{{ post.text }}'></Span>
+								<Span *ngIf='post.text.length > 150' text=' Näytä vähemmän' class='expand-desc'></Span>
+							</FormattedString>
+						</Label>
+					</StackLayout>
+
+					<!-- LIKES AND COMMENTS -AMOUNT -->
+					<StackLayout row='3' col='0' columns='auto auto' class='like-comment-area'>
+						<Label text='&#xf164; {{ postLikes ? convertNumber(postLikes) : 0 }}' class='fas like-amount-box'></Label>
+						<Label text='&#xf075; {{ postCommentAmount ? convertNumber(postCommentAmount) : 0 }}' class='fas comment-amount-box'></Label>
+					</StackLayout>
+
+				</GridLayout>
+
+				<StackLayout class='hr-light m-t-20 m-b-10'></StackLayout>
+
+			</StackLayout>
+
+			<!-- COMMENT -->
+			<StackLayout *ngIf='comment'>
+				<GridLayout columns='35 auto *' rows='35 * auto' class='comment'>
+					<Image row='0' col='0' class='user-img'
+						src='{{ comment.comment_owner.img ? url + comment.comment_owner.img : url + "default-picture" }}.png'>
+					</Image>
+					<GridLayout row='0' col='1' rows='* *' columns='* *' rowspan='2' colspan='3' class='comment-content'>
+						<Label row='0' col='0' [text]='comment.username' class='comment-username'></Label>
+						<Label row='1' col='0' colspan='3' [text]='comment.text' textWrap='true'></Label>
+					</GridLayout>
+					<Label row='2' col='1' text='&#xf164; {{ commentLikes ? convertNumber(commentLikes) : 0 }}'
+						class='fas comment-lower-area'></Label>
+					<Label row='2' col='2' text='&#xf017; {{ comment.date }}'
+						class='far comment-lower-area'></Label>
+				</GridLayout>
+			</StackLayout>
+		</StackLayout>
+	</ScrollView>
+
+	<!-- GO BACK -AREA -->
+	<StackLayout row='1' class='go-back-layout'>
+		<Label text='PALAA TAKAISIN' (tap)='goBack()'></Label>
+	</StackLayout>
+
+</GridLayout>

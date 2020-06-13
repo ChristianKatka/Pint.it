@@ -1,0 +1,30 @@
+<!-- Contains nsRouterLinks to a specific pages. Uses Font Awesome -icons. -->
+
+<StackLayout orientation='horizontal'>
+
+  <!-- Frontpage -->
+  <Button [nsRouterLink]="['/frontpage']" [nsRouterLinkActive]="['active']">
+      <Span class='fas icon' text='&#xf015;'></Span>
+  </Button>
+
+  <!-- Notifications -->
+  <Button [nsRouterLink]="['/notifications']" [nsRouterLinkActive]="['active']">
+      <Span class='fas icon' text='&#xf0f3;'></Span>
+  </Button>
+
+  <!-- Create post -->
+  <Button android:id="@+id/create_post" [nsRouterLink]="['/createpost']" [nsRouterLinkActive]="['active']">
+      <Span class='fas icon' text='&#xf055;'></Span>
+  </Button>
+
+  <!-- Profile -->
+  <Button [nsRouterLink]="['/profile', username]" [nsRouterLinkActive]="['active']">
+      <Span class='fas icon' text='&#xf2bd;'></Span>
+  </Button>
+
+  <!-- Settings -->
+  <Button [nsRouterLink]="['/settings']" [nsRouterLinkActive]="['active']">
+      <Span class='fas icon' text='&#xf013;'></Span>
+  </Button>
+
+</StackLayout>

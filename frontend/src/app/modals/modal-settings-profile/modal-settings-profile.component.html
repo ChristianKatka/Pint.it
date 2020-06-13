@@ -1,0 +1,47 @@
+<StackLayout>
+
+	<!-- HEADER -->
+	<StackLayout class='header'>
+		<Label (tap)='goBack()'>
+			<FormattedString>
+				<Span text='&#xf053; ' class='fas'></Span>
+				<Span text=' Palaa takaisin'></Span>
+			</FormattedString>
+		</Label>
+	</StackLayout>
+
+	<StackLayout class='m-5' (tap)='hideKeyboard(biofield)'>
+
+		<!-- USER'S IMAGE -->
+		<StackLayout class='box'>
+			<Label text='Vaihda profiilikuvasi' class='box-header'></Label>
+			<Image *ngIf='!imageChanging'
+				src='{{ currentImage ? url + currentImage : url + "default-picture" }}.jpg'></Image>
+			<StackLayout  [visibility]="imageChanging ? 'visible' : 'collapse'" class='indicator-layout'>
+				<ActivityIndicator [busy]='imageChanging'></ActivityIndicator>
+			</StackLayout>
+			<StackLayout orientation='horizontal'>
+				<Button text='Galleria' (tap)='getPicture()'></Button>
+				<Button text='Ota kuva' (tap)='takePicture()'></Button>
+			</StackLayout>
+		</StackLayout>
+
+		<!-- BIO -->
+		<StackLayout class='box'>
+			<Label text='Vaihda bio' class='box-header'></Label>
+			<GridLayout rows='auto * auto'>
+				<Label row='0' text='{{ bio ? bio.length : 0 }} / 500' class='bio-chars'></Label>
+				<TextView #biofield row='1' [(ngModel)]='bio' borderRadius='5' returnKeyType='send'
+					[(ngModel)]='bio' class='input input-border' maxLength='500'>
+				</TextView>
+				<Button *ngIf='!bioChanging' row='2' maxLength='500' text='Päivitä bio' class='btn btn-primary save-bio-btn'
+					isEnabled='{{ bio && bio !== oldBio  ? true : false }}' (tap)='updateUserBio()'></Button>
+				<StackLayout row='2' horizontalAlignment='center' [visibility]="bioChanging ? 'visible' : 'collapse'"
+					verticalAlignment='center'>
+					<ActivityIndicator [busy]='bioChanging'></ActivityIndicator>
+				</StackLayout>
+			</GridLayout>
+		</StackLayout>
+
+	</StackLayout>
+</StackLayout>

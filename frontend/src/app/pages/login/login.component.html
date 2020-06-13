@@ -1,0 +1,40 @@
+<GridLayout class='test'>
+  <StackLayout class='container'>
+    <StackLayout class='form login-form'>
+
+			<!-- USERNAME -->
+    	<StackLayout class='input-field'>
+        <Label text='Käyttäjätunnus' class='label' maxLength='30'></Label>
+        <TextField class='input' [(ngModel)]='username'></TextField>
+        <StackLayout class='hr-light'></StackLayout>
+			</StackLayout>
+			
+			<!-- PASSWORD -->
+      <StackLayout class='input-field'>
+        <Label text='Salasana' class='label'  maxLength='50'></Label>
+      	<TextField secure='true' class='input' [(ngModel)]='password'></TextField>
+        <StackLayout class='hr-light'></StackLayout>
+			</StackLayout>
+			
+			<!-- LOGIN & REGISTER -->
+			<Button *ngIf='!logging' class='btn btn-primary' text='Kirjaudu' (tap)='login()' 
+				isEnabled='{{ username && password ? true : false }}'></Button>
+			<ActivityIndicator *ngIf='logging' [busy]='logging'></ActivityIndicator>
+			<Label (tap)='register()' class='text-center'>
+				<FormattedString>
+					<Span text='Uusi käyttäjä? '></Span>
+					<Span text='Rekisteröidy.' class='register-text'></Span>
+				</FormattedString>
+			</Label>
+
+		</StackLayout>
+		
+		<!-- SOCIAL LOGIN (FACEBOOK & GOOGLE) -->
+    <StackLayout class='social-container'>
+			<Label text='Tai kirjaudu sosiaalisen median kautta'></Label>
+			<Button (tap)='socialLogin("facebook")' text='&#xf39e; Facebook' class='fab fb'></Button>
+			<Button (tap)='socialLogin("google")' text='&#xf0d5; Google' class='fab google'></Button>
+		</StackLayout>
+		
+	</StackLayout>
+</GridLayout>

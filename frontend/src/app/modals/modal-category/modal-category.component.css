@@ -1,0 +1,28 @@
+/* Filter-area for filter-options */
+.filters Label {
+  width: 50%;
+  text-align: center;
+  font-size: 18;
+  padding: 10;
+}
+/* Order-area for order-options */
+.orders Label {
+  color: black;
+  font-size: 18;
+  text-align: center;
+  padding: 10;
+}
+
+
+/* If filter (label) is selected */
+.selectedLabel {
+  background-color: #795548;
+  color: white;
+  padding: 10;
+}
+/* If filter (label) isn't selected */
+.dismissedLabel {
+  background-color: white;
+  color: black;
+  padding: 10;
+}

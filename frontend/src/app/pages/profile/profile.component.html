@@ -1,0 +1,162 @@
+<ActionBar>
+  <GridLayout columns='auto 2* auto' rows='auto'>
+    <Label (tap)='goBack()' col='0' [visibility]='myProfile ? "hidden" : "visible"' text='&#xf053;'
+      class='fas go-back'></Label>
+    <Label col='1' text='Profiili' class='profile-header'></Label>
+    <Label col='2' #category visibility='hidden' (tap)='changeCategory()' class='categorize'>
+      <FormattedString>
+        <Span text='&#xf0dd; ' class='fas'></Span>
+        <Span [text]='postOrder'></Span>
+      </FormattedString>
+    </Label>
+  </GridLayout>
+</ActionBar>
+
+
+<TabView [(ngModel)]='index' (selectedIndexChanged)='tabChanged($event, category)'>
+  <GridLayout *tabItem="{title: 'Käyttäjä'}" class='profile-tab'>
+    <ScrollView>
+      <StackLayout *ngIf='user' class='profile-box'>
+
+        <Image class='profile-pic' src='{{ user.img ? url + user.img : url + "default-picture" }}.png'>
+        </Image>
+
+        <Label class='username' [text]='user.username'></Label>
+
+        <!-- BIO -->
+        <StackLayout *ngIf='user.bio' (tap)='toggleDesc(shortDesc, longDesc)' class='bio'>
+          <Label #shortDesc textWrap='true'>
+            <FormattedString>
+              <Span text='{{ user.bio.length > 150 ? (user.bio | slice:0:100) : (user.bio) }}'></Span>
+              <Span *ngIf='user.bio.length > 150' text='.. Näytä lisää' class='expand-desc'></Span>
+            </FormattedString>
+          </Label>
+          <Label #longDesc textWrap='true' visibility='collapse'>
+            <FormattedString>
+              <Span text='{{ user.bio }}'></Span>
+              <Span *ngIf='user.bio.length > 100' text=' Näytä vähemmän' class='expand-desc'></Span>
+            </FormattedString>
+          </Label>
+        </StackLayout>
+
+        <StackLayout *ngIf='!myProfile'>
+          <Button #button (tap)='toggleFollow()' class='btn unfollowing-button' text='Seuraa'></Button>
+        </StackLayout>
+
+        <StackLayout class='hr-light m-t-15 m-b-15'></StackLayout>
+
+        <StackLayout>
+          <StackLayout class='user-numbers'>
+            <Label [text]='following ? following : 0'></Label>
+            <Label [text]='followers ? followers : 0'></Label>
+            <Label [text]='postsAmount ? postsAmount : 0'></Label>
+          </StackLayout>
+
+          <StackLayout class='user-number-info'>
+            <Label text='Seuraajat'></Label>
+            <Label text='Seurataan'></Label>
+            <Label text='Postaukset'></Label>
+          </StackLayout>
+        </StackLayout>
+
+      </StackLayout>
+    </ScrollView>
+  </GridLayout>
+
+
+  <StackLayout *tabItem="{ title: 'Postaukset' }">
+    <Label *ngIf='contents && contents.length < 1' text='Käyttäjällä ei ole postauksia!' textAlignment='center'
+      class='p-10'></Label>
+    <RadListView *ngIf='contents' [items]='contents' pullToRefresh='true'
+      (pullToRefreshInitiated)='getPosts(0, true, $event)' loadOnDemandMode='Auto'
+      (loadMoreDataRequested)='getPosts(contents.length, false, false, $event)'>
+      <ng-template let-item='item'>
+        <StackLayout>
+          <GridLayout columns='auto auto *' rows='70 * * * auto auto'>
+
+            <!-- PROFILE-IMG, USERNAME & DATE -->
+            <GridLayout row='0' rows='auto auto' columns='70 *' colspan='3' class='m-t-5'>
+              <Image row='0' col='0' rowspan='2' class='profile-img'
+                src='{{ user.img ? url + user.img : url + "default-picture" }}.png'></Image>
+              <Label row='0' col='1' [text]='item.post.username' class='h2'
+                [nsRouterLink]="['/profile/', item.post.username]"></Label>
+              <Label row='1' col='1' class='time-stamp' [text]='item.post.date'></Label>
+
+            </GridLayout>
+
+            <!-- POST PICTURE -->
+            <GridLayout row='1' colspan="3" rows="*" columns="*">
+              <Image (doubleTap)='animateLike(thumb); toggleLikePost(item.post.id, item.post.username)'
+                *ngIf='item.post.img' src='{{ url + item.post.img }}.png' class='m-y-10'></Image>
+              <Label #thumb row='1' colSpan="1" class='fas doubletap-thumb' fontSize='40' text='&#xf79f;'></Label>
+            </GridLayout>
+
+
+            <!-- BEER NAME, TYPE & GRADE -->
+            <GridLayout row='2' rows='auto auto auto' columns='100 auto' class='beer-info'>
+              <Label *ngIf='item.post.drink_name' row='0' col='0' colspan='3' [text]='item.post.drink_name'
+                class='beer-name'></Label>
+              <Label *ngIf='item.post.drink_type' row='1' col='0' colspan='2' text='Tyyppi:' fontWeight='bold'></Label>
+              <Label *ngIf='item.post.drink_type' row='1' col='2' [text]='item.post.drink_type'></Label>
+              <Label *ngIf='item.post.rating > 0' row='2' col='0' colspan='2' text='Arvosana:'
+                fontWeight='bold'></Label>
+              <Label *ngIf='item.post.rating > 0' row='2' col='2' [text]='item.post.stars'
+                class='fas'></Label>
+            </GridLayout>
+
+            <!-- DESCRIPTION -->
+            <StackLayout row='3' col='0' colspan='3' (tap)='toggleDesc(shortDesc, longDesc)' class='desc-area'>
+              <Label #shortDesc textWrap='true'>
+                <FormattedString>
+                  <Span
+                    text='{{ item.post.text.length > 150 ? (item.post.text | slice:0:150) : (item.post.text) }}'></Span>
+                  <Span *ngIf='item.post.text.length > 150' text='.. Näytä lisää' class='expand-desc'></Span>
+                </FormattedString>
+              </Label>
+              <Label #longDesc textWrap='true' visibility='collapse'>
+                <FormattedString>
+                  <Span text='{{ item.post.text }}'></Span>
+                  <Span *ngIf='item.post.text.length > 150' text=' Näytä vähemmän' class='expand-desc'></Span>
+                </FormattedString>
+              </Label>
+            </StackLayout>
+
+            <!-- LIKES AND COMMENTS -AMOUNT -->
+            <StackLayout row='4' col='0' columns='auto auto' class='like-comment-area'>
+              <Label #likeButton [backgroundColor]='item.post.liked ? "#855909" : "#a4a4a5"'
+                text='&#xf164; {{ item.likes ? convertNumber(item.likes) : 0 }} tykkäystä'
+                (tap)='toggleLikePost(item.post.id, item.post.username, likeButton)'
+                class='fas like-amount-box-active'></Label>
+              <Label (tap)='showAllComments(item.post.id, item.post.username)'
+                text='&#xf075; {{ item.commentAmount ? convertNumber(item.commentAmount) : 0 }} kommenttia'
+                class='fas comment-amount-box'></Label>
+            </StackLayout>
+
+            <!-- COMMENT-AREA -->
+            <StackLayout row='5' col='0' colspan='3' class='comment-area' *ngIf='item.comments'>
+              <StackLayout *ngFor='let c of item.comments'>
+                <GridLayout columns='auto auto *' rows='35 * auto'>
+                  <Image row='0' col='0'
+                    src='{{ c.comment_owner.img ? url + c.comment_owner.img : url + "default-picture" }}.png'
+                    (tap)='index = 0' [nsRouterLink]="['/profile/', c.username]"></Image>
+                  <GridLayout row='0' col='1' rows='* *' columns='* *' rowspan='2' colspan='3' class='comment-text'
+                    (tap)='showAllComments(item.post.id, item.post.username)'>
+                    <Label row='0' col='0' [text]='c.username' class='comment-name'
+                      [nsRouterLink]="['/profile/', c.username]"></Label>
+                    <Label row='1' col='0' colspan='3' [text]='c.text' textWrap='true'></Label>
+                  </GridLayout>
+                  <Label row='2' #thumb (tap)='toggleLikeComment(c.id, c.username, item.post.id, thumb)' col='1'
+                    [color]='c.liked ? "#b67f64" : "#595959"' text=' &#xf164; {{ c.likes ? c.likes : 0 }}'
+                    class='fas'></Label>
+                  <Label row='2' col='2' text='&#xf017; {{ c.date }}' class='far'></Label>
+                </GridLayout>
+              </StackLayout>
+            </StackLayout>
+
+          </GridLayout>
+          <StackLayout class='hr-light m-20'></StackLayout>
+        </StackLayout>
+      </ng-template>
+    </RadListView>
+  </StackLayout>
+</TabView>

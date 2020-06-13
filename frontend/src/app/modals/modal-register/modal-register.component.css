@@ -1,0 +1,29 @@
+.form {
+  background-color: #FFFFFF;
+  border-radius: 5;
+  margin: 15;
+}
+
+.header {
+  text-align: center;
+  font-size: 22;
+}
+
+.textfield-label {
+  font-weight: bold;
+  margin-bottom: 10;
+  text-align: center;
+}
+
+.username-valid {
+  background-color: green;
+  color: white;
+  border-radius: 10;
+  text-align: center;
+}
+.username-invalid {
+  background-color: red;
+  color: white;
+  border-radius: 10;
+  text-align: center;
+}

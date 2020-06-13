@@ -1,0 +1,14 @@
+/* Styles for the navbar */
+Button {
+  border-width: 1;
+  border-color: transparent;
+  width: 20%
+}
+
+.icon {
+  font-size: 20;
+}
+
+.active {
+  color: #b67f64;
+}

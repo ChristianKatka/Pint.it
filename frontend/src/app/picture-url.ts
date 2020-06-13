@@ -1,0 +1,1 @@
+export const url = 'https://res.cloudinary.com/ht3ndzrqd/image/upload/';

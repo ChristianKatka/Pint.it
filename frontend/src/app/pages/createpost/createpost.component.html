@@ -1,0 +1,101 @@
+<ActionBar>
+  <Label text='Uusi postaus'></Label>
+</ActionBar>
+
+<TabView [(ngModel)]='selectedIndex'>
+
+  <!-- FIRST TAB (IMAGE AND TEXT) -->
+  <StackLayout #firstTab *tabItem="{title: 'Postaus'}" (tap)='closeElements(false, false, textInput)' class='post-tab'>
+    <GridLayout rows='* auto'>
+
+      <!-- TAKE PICTURE AND TAKEN IMAGE'S PLACEHOLDER -->
+      <StackLayout row='0' class='m-10'>
+        <Label *ngIf='picture && picture.src' text='Poista kuva' (tap)='removeImage()' class='remove-image-button'></Label>
+        <Image *ngIf='picture && picture.src' [src]='picture.src'></Image>
+        <GridLayout rows='*' columns='*'>
+          <Label *ngIf='!picture || !picture.src' text='&#xf030;' (tap)='takePicture()' class='fas picture-placeholder'></Label>
+        </GridLayout>
+      </StackLayout>
+
+      <StackLayout row='1' class='lower-area'>
+        
+        <!-- LOWER AREA IN FIRST TAB -->
+        <GridLayout columns='* 70 70' rows='* auto auto'>
+          <TextView row='0' #textInput style='border-radius:5' hint='Mietteesi, arvostelusi tai yleinen löpinä' 
+            returnKeyType='send' [(ngModel)]='post.text' class='input' colspan='3' maxLength='1000'>
+          </TextView>
+          <Label *ngIf='post.text' row='1' text='{{ post.text.length }} / 1000' class='m-l-20'></Label>
+          <Button row='2' col='0' class='btn post-button' text='JULKAISE' (tap)='sendPost()'></Button>
+          <Button row='2' col='1' #cameraBtn text='&#xf030;' class='button fas camera' (tap)='takePicture()' opacity='0'></Button>
+          <Button row='2' col='1' #galleryBtn text='&#xf03e;' class='button fas gallery' (tap)='getPicture()' opacity='0'></Button>
+          <Button row='2' col='1' #selectBtn text='&#xf0c6;' class='button fas paperclip' (tap)='toggleImageOptions()'></Button>
+          <Button row='2' col='2' class='button fas beer-button' text='&#xf0fc; >' (tap)='selectedIndex = 1'></Button>
+        </GridLayout>
+
+      </StackLayout>
+
+      <ActivityIndicator row='1' rowspan='2' [busy]='isBusy' color='#795548' width='100' height='100'></ActivityIndicator>
+
+    </GridLayout>
+  </StackLayout>
+
+
+  
+  <!-- SECOND TAB (BEER INFORMATION) -->
+  <StackLayout *tabItem='{ title: "Lisää olut" }' class='form' (tap)='closeElements(beerField, beerType)'>
+
+    <GridLayout rows='*, auto'>
+      <ScrollView>
+      <GridLayout rows='auto auto auto' row='0'>
+        <!-- BEER NAME -->
+        <StackLayout class='input-field beer-info' row='0'>
+          <Label text='Juoman nimi'></Label> 
+          <TextField #beerField hint='&#xf0fc;' [(ngModel)]='post.drink_name' class='input input-border fas' maxLength='100' 
+            (blur)='dismissSearch(false)' style.text-style='normal' (textChange)='search($event.value)' (focus)='returnFocus()'></TextField>
+        </StackLayout>
+
+        <!-- BEER TYPE -->
+        <StackLayout class='input-field beer-info' row='1'>
+          <Label text='Juoman tyyppi'></Label>
+          <TextField #beerType hint='&#xf036;' [(ngModel)]='post.drink_type' class='input input-border fas' maxLength='100'></TextField>
+        </StackLayout>
+
+        <!-- BEER RATING -->
+        <StackLayout class='input-field beer-rating' row='2'>
+          <Label text='Arvosana' class='header'></Label>
+          <StackLayout class='input input-border rating-area'>
+            <Label *ngIf='rate' [text]='rate' class='rating fas'></Label>
+            <Label *ngIf='!rate' class='rating' text='Ei arvosanaa'></Label>
+            <Slider [(ngModel)]='post.rating' minValue='0' maxValue='5' (valueChange)='ratingValue($event)' color='#795548'></Slider>
+          </StackLayout>
+        </StackLayout>
+
+        <!-- BEER SUGGESTIONS SHOWING WHEN USER WRITES BEER'S NAME -->
+        <ScrollView row='1' *ngIf='searching && (drinks$ | async)?.length > 0'
+          class='beer-suggestions input input-border'>
+          <StackLayout>
+            <AbsoluteLayout *ngFor='let d of drinks$ | async' (tap)='chooseDrink(d, beerField)'>
+              <Label>
+                <FormattedString>
+                  <Span text='{{ d.name.length < 38 ? (d.name) : (d.name | slice:0:38) }}'></Span>
+                  <Span *ngIf='d.name.length > 38' text='..'></Span>
+                </FormattedString>
+              </Label>
+            </AbsoluteLayout>
+          </StackLayout>
+        </ScrollView>
+        
+      </GridLayout>
+    </ScrollView>
+
+      <!-- BUTTONS FOR GOING BACK OR CLEARING FORM -->
+      <StackLayout class='button-area' orientation='horizontal' row='1'>
+        <Button (tap)='selectedIndex = 0' text='Lisää postaukseen' ></Button>
+        <Button (tap)='empty()' text='Tyhjennä' class='empty-form'></Button>
+      </StackLayout>
+
+    </GridLayout>
+
+  </StackLayout>
+
+</TabView>

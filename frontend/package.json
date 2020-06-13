@@ -1,0 +1,54 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.frontapp",
+    "tns-ios": {
+      "version": "5.1.1"
+    },
+    "tns-android": {
+      "version": "5.3.1"
+    }
+  },
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "repository": "<fill-your-repository-here>",
+  "dependencies": {
+    "@angular/animations": "~7.1.0",
+    "@angular/common": "~7.1.0",
+    "@angular/compiler": "~7.1.0",
+    "@angular/core": "~7.1.0",
+    "@angular/forms": "~7.1.0",
+    "@angular/http": "~7.1.0",
+    "@angular/platform-browser": "~7.1.0",
+    "@angular/platform-browser-dynamic": "~7.1.0",
+    "@angular/router": "~7.1.0",
+    "@auth0/angular-jwt": "^2.1.0",
+    "nativescript-angular": "~7.1.0",
+    "nativescript-camera": "^4.4.0",
+    "nativescript-drop-down": "^5.0.0",
+    "nativescript-fancyalert": "^3.0.6",
+    "nativescript-imagepicker": "^6.1.2",
+    "nativescript-oauth2": "^1.4.1",
+    "nativescript-screen-orientation": "^2.0.0",
+    "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-dataform": "^4.0.0",
+    "nativescript-ui-listview": "^5.2.0",
+    "ngrok": "^3.1.1",
+    "reflect-metadata": "~0.1.12",
+    "rxjs": "~6.3.0",
+    "sequelize": "^5.7.1",
+    "tns-core-modules": "^5.2.2",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "^7.2.6",
+    "@nativescript/schematics": "~0.5.0",
+    "@ngtools/webpack": "~7.1.0",
+    "nativescript-dev-typescript": "^0.8.0",
+    "nativescript-dev-webpack": "^0.21.2"
+  },
+  "gitHead": "9b6565a4513375a33a59c44262dfc1d818a8205e",
+  "readme": "NativeScript Application",
+  "engines": {
+    "node": ">=8.0.0 <12.0.0"
+  }
+}

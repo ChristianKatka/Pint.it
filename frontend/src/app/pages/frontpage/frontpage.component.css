@@ -1,0 +1,121 @@
+/* ACTIONBAR */
+ActionBar Label {
+  color: white;
+  width: 33%;
+  padding-right: 5;
+}
+ActionBar .categorize {
+  padding-top: 5;
+}
+
+/* When double tapping picture in post(liking post) */
+.doubletap-thumb {
+  font-size: 100;
+  text-align: center; 
+  color: #f87e37;
+  opacity: 0;
+  vertical-align: center;
+}
+
+/* Post's user-picture */
+.profile-img {
+  width: 60;
+  height: 60;
+  margin-bottom: 5;
+  border-radius: 150;
+  stretch: aspectFill;
+}
+
+/* Info area for the beer */
+.beer-info > * {
+  padding: 3 0;
+  font-size: 16;
+  margin-left: 5;
+}
+
+.beer-info .beer-name {
+  font-weight: bold;
+}
+
+
+/* Text-area for post's text */
+.desc-area {
+  margin: 12 5;
+  font-size: 16;
+}
+
+/* Area where comment's and likes are */
+.like-comment-area {
+  orientation: horizontal;
+}
+/* Labels inside comments and likes -area */
+.like-comment-area Label {
+  margin: 6 5 0 6;
+  padding: 4 10;
+  font-size: 16;
+  color: white;
+  border-radius: 2;
+}
+/* How many likes -box */
+.like-amount-box-unactive {
+  background-color: #a4a4a5;
+}
+.like-amount-box-active{
+  background-color: #855909
+}
+/* How many comments -box */
+.comment-amount-box { 
+  background-color: #6c87e0;
+}
+
+
+/* Expand post's text -button */
+.expand-desc {
+  font-weight: bold;
+}
+
+/* Whole comments area (where there're 2 comments) */
+.comment-area {
+  margin-top: 12;
+  margin-left: 10;
+  margin-right: 10;
+}
+
+/* One comment */
+.comment-area > StackLayout > GridLayout {
+  margin-top: 10;
+  margin-bottom: 10;
+}
+
+/* User images inside comments */
+.comment-area Image {
+  width: 30; 
+  height: 30;
+  stretch: aspectFill;
+  border-radius: 100;
+  margin-top: 10;
+}
+
+/* Comment's text and username */
+.comment-area .comment-text {
+  margin: 5;
+  padding-top: 5;
+  padding-right: 5;
+  padding-bottom: 5;
+  background-color: #eeeeee;
+  border-radius: 5;
+}
+/* Comment's username and text */
+.comment-area .comment-text > Label {
+  margin-left: 10;
+}
+/* Username of the comment's */
+.comment-name {
+  font-size: 16;
+  font-weight: bold;
+}
+
+.comment-area > StackLayout > GridLayout > Label {
+  margin-left: 10;
+  margin-top: 5;
+} 

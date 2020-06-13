@@ -1,0 +1,115 @@
+ActionBar Label {
+  color: white;
+  width: auto;
+}
+
+ActionBar .go-back {
+  font-size: 15;
+  text-align: left;
+}
+Actionbar .profile-header {
+  font-size: 22;
+  text-align: center;
+}
+ActionBar .categorize {
+  text-align: right;
+}
+
+/* Color of tabview's line */
+TabView {
+  android-selected-tab-highlight-color: #795548;
+}
+
+.profile-tab {
+  background-image: url('~/assets/images/sketchs/createpost-picture-3.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
+}
+
+.profile-box {
+  margin: 10 20;
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 3;
+  padding: 15;
+}
+
+/* User's username */
+.username {
+  font-size: 23;
+  font-weight: bold;
+  margin-top: 5;
+  margin-bottom: 10;
+  text-align: center;
+}
+/* Users profile-picture */
+.profile-pic {
+  margin-top: 15;
+  width: 120;
+  height: 120;
+  border-radius: 100;
+  stretch: aspectFill;
+}
+
+/* Users bio */
+.bio {
+  width: 95%;
+  margin: 0 20 20 20;
+  background-color: #f8ddae;
+  padding: 8;
+  border-radius: 10;
+}
+
+/* When you're following someone */
+.following-button {
+  background-color: #a3a3a3;
+  color: white;
+}
+
+/* When you're not following someone */
+.unfollowing-button {
+  background-color: #445699;
+  color: white;
+}
+
+/* When double tapping picture in post(liking post) */
+.doubletap-thumb {
+  font-size: 100;
+  text-align: center; 
+  color: rgb(248, 126, 55);
+  opacity: 0;
+  vertical-align: center;
+}
+
+/* User's number (followed, following, post-amount etc.) */
+.user-numbers {
+  font-size: 17;
+  font-weight: bold;
+  text-align: center;
+  orientation: horizontal;
+}
+.user-numbers > label {
+  width: 33%;
+}
+.user-number-info {
+  orientation: horizontal;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+.user-number-info > label {
+  width: 33%;
+}
+
+/* How many likes -box */
+.like-amount-box-unactive {
+  background-color: #a4a4a5;
+}
+
+.like-amount-box-active{
+  background-color: #855909
+}
+
+.like-amount-box {
+  background-color: #bf4a4a;
+}

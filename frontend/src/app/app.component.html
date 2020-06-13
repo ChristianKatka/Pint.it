@@ -1,0 +1,16 @@
+
+<!-- Divides main view area to 2 sections. First one contains the main view area
+and second one is preserved for the navigation bar. -->
+<GridLayout rows='* 50'>
+
+  <!-- Main view area -->
+  <StackLayout row='0' [rowspan]='showNavbar ? 1 : 2'>
+    <page-router-outlet></page-router-outlet>
+  </StackLayout>
+
+  <!-- Navigation bar  -->
+  <StackLayout #navbar row='1' *ngIf='showNavbar'>
+    <ns-navbar></ns-navbar>
+  </StackLayout>
+
+</GridLayout>

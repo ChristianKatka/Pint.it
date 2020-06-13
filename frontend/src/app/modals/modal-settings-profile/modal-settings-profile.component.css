@@ -1,0 +1,59 @@
+/* Who layout's header */
+.header {
+  background-color: #795548;
+  color: white;
+  padding: 10;
+}
+
+/* One box contains one thing to update */
+.box {
+  border-radius: 5;
+  background-color: #efefef;
+  margin: 10;
+}
+
+/* Header of one box */
+.box .box-header {
+  color: white;
+  margin-bottom: 10;
+  border-radius: 5 5 0 0;
+  padding: 3;
+  background-color: #795548;
+  text-align: center;
+}
+
+/* Activity-indicator -layout */
+.indicator-layout {
+  vertical-align: center;
+  horizontal-align: center;
+}
+
+.indicator-layout ActivityIndicator {
+  width: 170;
+  height: 170;
+}
+
+Button {
+  color: white;
+  background-color: #A47A6A;
+  width: 50%;
+}
+
+/* User's profile-image */
+Image {
+  height: 170;
+  width: 170;
+  border-radius: 100;
+  stretch: aspectFill;
+}
+/* Bio's length */
+.bio-chars {
+  text-align: center;
+}
+/* Bio's input-field */
+TextView {
+  border-radius: 5;
+  background-color: white;
+  margin: 10;
+  margin-bottom: 0;
+}

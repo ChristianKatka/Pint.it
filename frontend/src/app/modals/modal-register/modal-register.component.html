@@ -1,0 +1,40 @@
+<StackLayout class='form'>
+
+  <Label *ngIf='!socialRegistration' text='Rekisteröidy' class='header'></Label>
+  <Label *ngIf='socialRegistration' text='Valitse käyttäjätunnus' class='header'></Label>
+
+  <!-- USERNAME -->
+  <StackLayout class='input-field'>
+    <Label text='Käyttäjätunnus' class='textfield-label'></Label>
+    <TextField class='input' [(ngModel)]='registerInfo.username' (blur)='checkUsername()' maxLength='30'></TextField>
+    <Label *ngIf='usernameInfo && usernameInfo === "OK"' [text]='usernameInfo' class='username-valid'></Label>
+    <Label *ngIf='usernameInfo && usernameInfo !== "OK"' [text]='usernameInfo' class='username-invalid'></Label>
+    <StackLayout *ngIf='!usernameInfo' class='hr-light'></StackLayout>
+    <ActivityIndicator *ngIf='searchingUsername' [busy]='searchingUsername' with='20' height='20'></ActivityIndicator>
+  </StackLayout>
+
+  <!-- PASSWORD -->
+  <StackLayout class='input-field' *ngIf='!socialRegistration'>
+    <Label text='Salasana' class='textfield-label'></Label>
+    <TextField secure='true' class='input' [(ngModel)]='registerInfo.password' maxLength='50'></TextField>
+    <StackLayout class='hr-light'></StackLayout>
+  </StackLayout>
+
+  <!-- PASSWORD AGAIN -->
+  <StackLayout class='input-field' *ngIf='!socialRegistration'>
+    <Label text='Salasana uudestaan' class='textfield-label'></Label>
+    <TextField secure='true' class='input' [(ngModel)]='registerInfo.rePassword' maxLength='50'></TextField>
+    <StackLayout class='hr-light'></StackLayout>
+    <Label *ngIf='rePassword && password !== rePassword' text='Salasanat eivät täsmää' textAlignment='center'></Label>
+  </StackLayout>
+
+  <!-- REGISTER -->
+  <!-- Only pressable if all fields are filled and username is not taken + is valid -->
+  <Button *ngIf='!socialRegistration' class='btn btn-primary' text='Rekisteröidy' (tap)='checkUsername(true);' 
+    isEnabled='{{ registerInfo.username && usernameInfo === "OK" && registerInfo.password && 
+      registerInfo.rePassword && registerInfo.password === registerInfo.rePassword ? true : false }}'>
+  </Button>
+  <Button *ngIf='socialRegistration' class='btn btn-primary' text='Valitse' (tap)='checkUsername(true);'
+    isEnabled='{{ registerInfo.username ? true : false }}'></Button>
+
+</StackLayout>
