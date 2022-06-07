@@ -1,3 +1,6 @@
+# Hei
+Katso mielummin uusin ja edistyksekkäin äppini jonka olen rakentanut [github clap app](https://github.com/ChristianKatka/clap-app-public)
+
 # Pint<span></span>.it
 
 Mobile application revolving around social media and beers
